@@ -1,71 +1,28 @@
-"use client";
+import Link from "next/link";
 
-import FormButton from "@/components/form-btn";
-import FormInput from "@/components/form-input";
-import { useActionState } from "react";
-import { handleLogin } from "@/app/actions";
-import Image from "next/image";
-import { EnvelopeIcon, UserIcon, LockClosedIcon } from "@heroicons/react/24/outline";
-
-export default function LogIn() {
-  const [state, action] = useActionState(handleLogin, null);
-
+export default function Home() {
   return (
-    <div className="flex flex-col gap-10 py-8 px-6">
-      <div className="flex flex-col items-center gap-2">
-        <Image
-          src="/Logo.svg"
-          alt="Logo"
-          width={150}
-          height={50}
-          priority
-        />
+    <div className="flex flex-col items-center justify-between min-h-screen p-6">
+      <div className="my-auto flex flex-col items-center gap-2 *:font-medium">
+        <span className="text-9xl">🥕</span>
+        <h1 className="text-4xl ">Carrot Assignment 9</h1>
+        <h2 className="text-2xl">Authentication</h2>
+        <h4 className="text-xl">12/24~12/25</h4>
       </div>
-      <form action={action} className="flex flex-col gap-3">
-        <FormInput
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          errors={state?.fieldErrors?.email}
-          icon={<EnvelopeIcon className="w-5 h-5 text-gray-500" />}
-          defaultValue={state?.formData?.email as string}
-        />
-        <FormInput
-          name="username"
-          type="text"
-          placeholder="Username"
-          required
-          errors={state?.fieldErrors?.username}
-          icon={<UserIcon className="w-5 h-5 text-gray-500" />}
-          defaultValue={state?.formData?.username as string}
-        />
-        <FormInput
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          errors={state?.fieldErrors?.password}
-          icon={<LockClosedIcon className="w-5 h-5 text-gray-500" />}
-        />
-        <FormButton text="Log in" />
-        {state?.success && (
-          <div role="alert" className="alert alert-success flex flex-row">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="h-6 w-6 shrink-0 stroke-current">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span>{state.message}</span>
-          </div>
-        )}
-      </form>
+      <div className="flex flex-col items-center gap-3 w-full">
+        <Link
+          href="/create-account"
+          className="w-full bg-orange-500 text-white text-lg font-medium py-2.5 rounded-md text-center hover:bg-orange-400 transition-colors"
+        >
+          Create Account
+        </Link>
+       <Link
+          href="/log-in"
+          className="w-full bg-white text-orange-500 text-lg font-medium py-2.5 rounded-md text-center hover:bg-orange-400 transition-colors"
+        >
+          Sign In
+        </Link>
+      </div>
     </div>
   );
 }
