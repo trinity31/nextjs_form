@@ -6,7 +6,7 @@ interface Routes {
 }
 // hash map of public only urls
 const publicOnlyUrls: Routes = {
-    "/": true,
+    "/auth": true,
     "/log-in": true,
     "/create-account": true,
 };
@@ -16,11 +16,11 @@ export async function middleware(request: NextRequest) {
     const exists = publicOnlyUrls[request.nextUrl.pathname];
     if (!session.id) { // if user is not logged in
         if (!exists) { // if the url is not one of public only urls
-            return NextResponse.redirect(new URL("/", request.url)); // redirect to home page
+            return NextResponse.redirect(new URL("/auth", request.url)); // redirect to home page
         }
     } else { // if user is logged in
         if(exists) { // if the url is one of public only urls   
-            return NextResponse.redirect(new URL("/products", request.url)); // redirect to products page
+            return NextResponse.redirect(new URL("/", request.url)); // redirect to products page
         }
     }
 }
